@@ -1,4 +1,4 @@
-//Da se iskoristat 5 array funkcii
+//2. Da se iskoristat 5 array funkcii
 
 
 // 1st
