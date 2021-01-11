@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Welcome to
+        <%= title %>
+    </p>
+    <form action="/edit" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value='<%= player.name %>'>
+        </div>
+        <div>
+            <label for="goals_score">Goal scored</label>
+            <input type="text" name="goals_score" id="goals_score">
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</body>
+<footer>
+    <a href="/">Home</a>
+</footer>
+
+</html>

@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Welcome to
+        <%= title %>
+    </p>
+    <form action="/players" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div>
+            <label for="goals_score">Goal scored</label>
+            <input type="text" name="goals_score" id="goals_score">
+        </div>
+        <button type="submit">Create</button>
+    </form>
+
+    <div>
+        <a href="/">Home</a>
+    </div>
+
+    <%- include('partials/footer') %>
