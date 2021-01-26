@@ -1,19 +1,11 @@
 <%- include('partials/header') %>
-
-    <h1>List of all posts</h1>
-    <ul>
-        <li>
-            <h4>Post 1 Title</h4>
-            <p>Post 1 Content</p>
-        </li>
-        <li>
-            <h4>Post 2 Title</h4>
-            <p>Post 2 Content</p>
-        </li>
-        <li>
-            <h4>Post 3 Title</h4>
-            <p>Post 3 Content</p>
-        </li>
-    </ul>
-
-    <%- include('partials/footer') %>
+<a href="/create">Create</a>
+<h1>List of all posts</h1>
+  <% blogPosts.forEach(blogPost => { %>
+    <div style="border: 1px solid gray; padding: 10px;">
+      <h4><%= blogPost.title %></h4>
+      <p><%= blogPost.content %></p>
+      <p>#<%= blogPost.view_count %> views</p>
+    </div>
+  <% }) %>
+<%- include('partials/footer') %>
