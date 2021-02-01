@@ -7,12 +7,11 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 )
 
-// DRY - Don't Repeat Yourself
-
 for (let i = 0; i < 10; i++) {
   (new BlogPost({
     title: faker.lorem.sentence().slice(0, -1),
-    content: faker.lorem.paragraph()
+    content: faker.lorem.paragraph(),
+    slug: faker.lorem.slug()
   })).save()
       .then(res => {
         console.log(res)
