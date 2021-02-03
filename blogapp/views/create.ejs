@@ -4,6 +4,12 @@
 <form action="/posts" method="POST">
   Title: <input type="text" name="title" id="title"><br>
   Content: <input type="text" name="content" id="content">
+  Author: 
+  <select name="author" id="">
+    <% users.forEach(user => { %>
+     <option value=""><%= user.name %></option>
+    <% }) %>
+  </select>
   <button type="submit">Submit</button>
 </form>
 <%- include('partials/footer') %>
