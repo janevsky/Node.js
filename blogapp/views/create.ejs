@@ -1,15 +1,23 @@
 <%- include('partials/header') %>
-<a href="/">Home</a>
-<h3>Create</h3>
-<form action="/posts" method="POST">
-  Title: <input type="text" name="title" id="title"><br>
-  Content: <input type="text" name="content" id="content">
-  Author: 
-  <select name="author" id="">
-    <% users.forEach(user => { %>
-     <option value=""><%= user.name %></option>
-    <% }) %>
-  </select>
-  <button type="submit">Submit</button>
+<h5>Create new blog post</h5>
+<hr>
+<form action="/posts" method="POST" class="mt-5" style="width: 600px; margin: 0 auto;">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input name="title" class="form-control" id="title">
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" id="content" name="content"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <select class="form-select" name="author_id" aria-label="Default select example">
+      <% users.forEach(user => { %>
+        <option value="<%= user._id %>"><%= user.name %></option>
+       <% }) %>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <%- include('partials/footer') %>

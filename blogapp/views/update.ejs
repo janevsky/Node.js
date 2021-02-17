@@ -1,9 +1,28 @@
 <%- include('partials/header') %>
-<a href="/">Home</a>
-<h3>Update</h3>
-<form action="/blogposts/<%= blogPost._id %>" method="POST">
-  Title: <input style="width: 500px;" type="text" name="title" id="title" value="<%= blogPost.title %>"><br>
-  Content: <textarea name="content" id="content" cols="30" rows="5"><%= blogPost.content %></textarea>
-  <button type="submit">Submit</button>
+<h5>Update blog post</h5>
+<hr>
+<form action="/blogposts/<%= blogPost._id %>" class="mt-5" method="POST" style="width: 600px; margin: 0 auto;">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input name="title" value="<%= blogPost.title %>" class="form-control" id="title">
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" id="content" rows="5" name="content"><%= blogPost.content %></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <select class="form-select" name="author_id" aria-label="Default select example">
+      <% users.forEach(user => { %>
+        <% if (user._id.equals(blogPost.author._id)) { %>
+          <option selected value="<%= user._id %>"><%= user.name %></option>
+        <% } else { %>
+          <option value="<%= user._id %>"><%= user.name %></option>
+        <% } %>
+      <% }) %>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <%- include('partials/footer') %>

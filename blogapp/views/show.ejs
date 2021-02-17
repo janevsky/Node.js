@@ -1,7 +1,12 @@
-<div style="border: 1px solid gray; padding: 10px;">
-  <a href="/">Home</a>
-  <a href="/blogposts/<%= blogPost._id %>">Edit</a>
-  <h4><%= blogPost.title %></h4>
-  <p><%= blogPost.content %></p>
-  <p>#<%= blogPost.view_count %> views</p>
+<%- include('partials/header') %>
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= blogPost.title %></h5>
+    <h6 class="card-subtitle mb-2 text-muted">by <%= blogPost.author.name %></h6>
+    <h6 class="card-subtitle mb-2 text-muted"><%= blogPost.view_count %> views</h6>
+    <p class="card-text"><%= blogPost.content %></p>
+    <a class="card-link" href="/blogposts/<%= blogPost._id %>">Edit</a>
+    <a class="card-link" href="javascript:;" onclick="deleteBlogPost(`<%= blogPost._id %>`)">Delete</a>
+  </div>
 </div>
+<%- include('partials/footer') %>

@@ -1,9 +1,10 @@
 const BlogPost = require('../models/BlogPost')
 const User = require('../models/User')
+const faker = require('faker')
 
 module.exports = {
   getHomepage: async (req, res) => {
-    const blogPosts = await BlogPost.find()
+    const blogPosts = await BlogPost.find().populate('author', 'name').sort({view_count: -1})
 
     res.render('index', { title: 'Express', blogPosts: blogPosts });
   },
@@ -20,7 +21,11 @@ module.exports = {
   },
   postCreate: async (req, res) => { 
     try {
-      const blogPost = new BlogPost(req.body)
+      const blogPost = new BlogPost({
+        ...req.body, 
+        slug: faker.lorem.slug(),
+        author: req.body.author_id
+      })
 
       await blogPost.save()
     } catch (err) {
@@ -31,19 +36,21 @@ module.exports = {
   },
   getBlogPost: async (req, res) => {
     try {
-      var blogPost = await BlogPost.findById(req.params.id)
+      var blogPost = await BlogPost.findById(req.params.id).populate('author', 'name')
+      var users = await User.find()
     } catch (error) {
       console.log('Error: ', error.message)
       res.redirect('/')
     }
 
-    res.render('update', { blogPost: blogPost })
+    res.render('update', { blogPost, users })
   },
   postUpdate: async (req, res) => {
     try {
       await BlogPost.updateOne({ _id: req.params.id }, {
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        author: req.body.author_id
       })
     } catch (error) {
       console.log('Error: ', error.message)
@@ -53,7 +60,7 @@ module.exports = {
   },
   getBySlug: async (req, res) => {
     try {
-      var blogPost = await BlogPost.findOne({ slug: req.params.slug })
+      var blogPost = await BlogPost.findOne({ slug: req.params.slug }).populate('author', 'name')
       blogPost.view_count += 1
       await blogPost.save()
       
